@@ -7,7 +7,7 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // Set to false to close registration
-const REGISTRATION_OPEN = false;
+const REGISTRATION_OPEN = true;
 
 export async function POST(request: Request) {
     try {
@@ -24,7 +24,9 @@ export async function POST(request: Request) {
         const full_name = formData.get('full_name') as string;
         const email = formData.get('email') as string;
         const phone = formData.get('phone') as string;
-        const address = formData.get('address') as string;
+        const village = formData.get('address') as string;
+        const state = (formData.get('state') as string) || '';
+        const address = [village, state].filter(Boolean).join(', ');
         const city = formData.get('city') as string;
         const aadhar_number = formData.get('aadhar_number') as string;
         const role_type = formData.get('role_type') as string;

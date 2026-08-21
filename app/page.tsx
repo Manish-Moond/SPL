@@ -1,5 +1,5 @@
-import { RegistrationClosed } from "@/components/registration-closed";
+import { RegistrationPage } from '@/components/registration-page';
 
 export default function HomePage() {
-    return <RegistrationClosed />;
+    return <RegistrationPage />;
 }

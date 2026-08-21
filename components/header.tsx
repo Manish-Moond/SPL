@@ -10,7 +10,7 @@ export function Header() {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    if (pathname === '/players/info') {
+    if (pathname === '/' || pathname === '/register' || pathname === '/players/info') {
         return null;
     }
 
@@ -69,15 +69,15 @@ export function Header() {
                                 href={link.href}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                                     isActive(link.href)
-                                        ? 'text-cyan-400 bg-slate-800'
-                                        : 'text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50'
+                                        ? 'text-[#FF6B00] bg-slate-800'
+                                        : 'text-slate-300 hover:text-[#FF6B00] hover:bg-slate-800/50'
                                 }`}
                             >
                                 {link.label}
                             </Link>
                         ))}
                         <Link href="/register">
-                            <Button className="ml-4 bg-blue-600 hover:bg-blue-700 text-white">
+                            <Button className="ml-4 bg-[#FF6B00] hover:bg-[#e55f00] text-white">
                                 Register
                             </Button>
                         </Link>
@@ -85,7 +85,7 @@ export function Header() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-2 text-slate-300 hover:text-cyan-400"
+                        className="md:hidden p-2 text-slate-300 hover:text-[#FF6B00]"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -108,15 +108,15 @@ export function Header() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                                         isActive(link.href)
-                                            ? 'text-cyan-400 bg-slate-800'
-                                            : 'text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50'
+                                        ? 'text-[#FF6B00] bg-slate-800'
+                                        : 'text-slate-300 hover:text-[#FF6B00] hover:bg-slate-800/50'
                                     }`}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
                             <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                                <Button className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white">
+                                <Button className="w-full mt-2 bg-[#FF6B00] hover:bg-[#e55f00] text-white">
                                     Register
                                 </Button>
                             </Link>
