@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "co.frequencyworld.app",
+      "sha256_cert_fingerprints": ["AF:63:EB:20:A6:4D:5C:7F:2A:1E:4F:CB:CB:A0:35:00:C1:EA:B6:CD:18:8B:A7:BB:E6:6A:2F:B0:81:58:ED:83", "2d:ce:40:0b:c6:70:95:80:06:65:52:f0:4a:55:33:e5:a8:40:d8:ab:36:a0:f0:47:29:67:a9:ba:09:0b:9b:7c"]
+    }
+  }
+]
