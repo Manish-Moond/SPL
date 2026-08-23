@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# foglamp scan (contains edit token)
+.foglamp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

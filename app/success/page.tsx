@@ -6,8 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { PageShell, themeCardClass } from '@/components/page-shell';
 
-// Force dynamic rendering to prevent prerendering errors
 export const dynamic = 'force-dynamic';
 
 function SuccessPageContent() {
@@ -52,54 +52,54 @@ function SuccessPageContent() {
 
     if (isVerifying) {
         return (
-            <div className="container mx-auto py-10 flex justify-center min-h-screen items-center">
-                <Card className="w-full max-w-md bg-slate-900 border-slate-800 text-white shadow-xl">
-                    <CardContent className="pt-6 flex flex-col items-center gap-4">
-                        <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
-                        <p className="text-slate-400">Verifying your payment...</p>
+            <PageShell className="flex min-h-screen items-center justify-center">
+                <Card className={`w-full max-w-md ${themeCardClass}`}>
+                    <CardContent className="flex flex-col items-center gap-4 pt-6">
+                        <Loader2 className="h-8 w-8 animate-spin text-[#FF6B00]" />
+                        <p className="text-neutral-400">Verifying your payment...</p>
                     </CardContent>
                 </Card>
-            </div>
+            </PageShell>
         );
     }
 
     return (
-        <div className="container mx-auto py-10 flex justify-center min-h-screen items-center">
-            <Card className="w-full max-w-md bg-slate-900 border-slate-800 text-white shadow-xl">
+        <PageShell className="flex min-h-screen items-center justify-center">
+            <Card className={`w-full max-w-md ${themeCardClass}`}>
                 <CardHeader className="text-center">
-                    <div className="flex justify-center mb-4">
-                        <CheckCircle2 className="h-16 w-16 text-cyan-500" />
+                    <div className="mb-4 flex justify-center">
+                        <CheckCircle2 className="h-16 w-16 text-[#FF6B00]" />
                     </div>
-                    <CardTitle className="text-3xl font-bold text-cyan-500">
+                    <CardTitle className="text-3xl font-bold text-[#FF6B00]">
                         Payment Successful!
                     </CardTitle>
-                    <CardDescription className="text-slate-400 mt-2">
+                    <CardDescription className="mt-2 text-neutral-400">
                         Your registration has been completed successfully
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col items-center gap-6">
-                    <div className="text-center space-y-2">
-                        <p className="text-slate-300">
+                    <div className="space-y-2 text-center">
+                        <p className="text-neutral-300">
                             Thank you for registering for the cricket tournament!
                         </p>
                         {orderId && (
-                            <p className="text-sm text-slate-500">
+                            <p className="text-sm text-neutral-500">
                                 Order ID: {orderId}
                             </p>
                         )}
                         {verificationStatus === 'success' && (
-                            <p className="text-xs text-cyan-500 mt-2">
+                            <p className="mt-2 text-xs text-[#FF6B00]">
                                 ✓ Payment verified and confirmed
                             </p>
                         )}
                     </div>
                     <div className="w-full space-y-3">
-                        <p className="text-sm text-slate-400 text-center">
+                        <p className="text-center text-sm text-neutral-400">
                             You will receive a confirmation email shortly with all the details.
                         </p>
                         <Button
                             asChild
-                            className="w-full bg-blue-600 hover:bg-blue-700 font-bold py-3"
+                            className="w-full bg-[#FF6B00] py-3 font-bold text-white hover:bg-[#e55f00]"
                         >
                             <Link href="/register">
                                 Register Another Player
@@ -108,24 +108,23 @@ function SuccessPageContent() {
                     </div>
                 </CardContent>
             </Card>
-        </div>
+        </PageShell>
     );
 }
 
 export default function SuccessPage() {
     return (
         <Suspense fallback={
-            <div className="container mx-auto py-10 flex justify-center min-h-screen items-center">
-                <Card className="w-full max-w-md bg-slate-900 border-slate-800 text-white shadow-xl">
-                    <CardContent className="pt-6 flex flex-col items-center gap-4">
-                        <Loader2 className="h-8 w-8 animate-spin text-cyan-500" />
-                        <p className="text-slate-400">Loading...</p>
+            <PageShell className="flex min-h-screen items-center justify-center">
+                <Card className={`w-full max-w-md ${themeCardClass}`}>
+                    <CardContent className="flex flex-col items-center gap-4 pt-6">
+                        <Loader2 className="h-8 w-8 animate-spin text-[#FF6B00]" />
+                        <p className="text-neutral-400">Loading...</p>
                     </CardContent>
                 </Card>
-            </div>
+            </PageShell>
         }>
             <SuccessPageContent />
         </Suspense>
     );
 }
-

@@ -52,7 +52,7 @@ export default function PlayersPage() {
     };
 
     useEffect(() => {
-        const savedPassword = sessionStorage.getItem(AUTH_STORAGE_KEY);
+        const savedPassword = localStorage.getItem(AUTH_STORAGE_KEY);
         if (savedPassword) {
             setPassword(savedPassword);
             setIsAuthenticated(true);
@@ -97,7 +97,7 @@ export default function PlayersPage() {
             const list = Array.isArray(data?.data) ? data.data : [];
             setPlayers(list);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-            sessionStorage.setItem(AUTH_STORAGE_KEY, password);
+            localStorage.setItem(AUTH_STORAGE_KEY, password);
             setIsAuthenticated(true);
             toast.success('Login successful');
         } catch (error) {

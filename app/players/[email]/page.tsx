@@ -108,7 +108,7 @@ export default function PlayerCardPage() {
             }
         }
 
-        const savedPassword = sessionStorage.getItem('slp.admin.password');
+        const savedPassword = localStorage.getItem('slp.admin.password');
         if (savedPassword) {
             loadPlayers(savedPassword);
         } else if (!cached) {

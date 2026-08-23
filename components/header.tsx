@@ -10,7 +10,7 @@ export function Header() {
     const pathname = usePathname();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    if (pathname === '/' || pathname === '/register' || pathname === '/players/info') {
+    if (pathname === '/register' || pathname === '/players/info') {
         return null;
     }
 
@@ -30,7 +30,7 @@ export function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur supports-[backdrop-filter]:bg-slate-950/80">
+        <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#050505]/95 backdrop-blur supports-[backdrop-filter]:bg-[#050505]/80">
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
@@ -69,8 +69,8 @@ export function Header() {
                                 href={link.href}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                                     isActive(link.href)
-                                        ? 'text-[#FF6B00] bg-slate-800'
-                                        : 'text-slate-300 hover:text-[#FF6B00] hover:bg-slate-800/50'
+                                        ? 'text-[#FF6B00] bg-white/10'
+                                        : 'text-neutral-300 hover:text-[#FF6B00] hover:bg-white/10'
                                 }`}
                             >
                                 {link.label}
@@ -85,7 +85,7 @@ export function Header() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-2 text-slate-300 hover:text-[#FF6B00]"
+                        className="md:hidden p-2 text-neutral-300 hover:text-[#FF6B00]"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -99,7 +99,7 @@ export function Header() {
 
                 {/* Mobile Navigation */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden border-t border-slate-800 py-4">
+                    <div className="md:hidden border-t border-white/10 py-4">
                         <nav className="flex flex-col space-y-2">
                             {navLinks.map((link) => (
                                 <Link
@@ -108,8 +108,8 @@ export function Header() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                                         isActive(link.href)
-                                        ? 'text-[#FF6B00] bg-slate-800'
-                                        : 'text-slate-300 hover:text-[#FF6B00] hover:bg-slate-800/50'
+                                        ? 'text-[#FF6B00] bg-white/10'
+                                        : 'text-neutral-300 hover:text-[#FF6B00] hover:bg-white/10'
                                     }`}
                                 >
                                     {link.label}

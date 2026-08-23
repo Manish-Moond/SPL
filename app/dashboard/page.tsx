@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Loader2, Lock, Users, CheckCircle2, XCircle, Clock, Eye, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
+const AUTH_STORAGE_KEY = 'slp.admin.password';
+
 interface Registration {
     id: string;
     full_name: string;
@@ -40,25 +42,34 @@ export default function DashboardPage() {
     const [isUpdatingScreenshot, setIsUpdatingScreenshot] = useState(false);
     const [selectedPhotoFile, setSelectedPhotoFile] = useState<File | null>(null);
     const [isUpdatingPhoto, setIsUpdatingPhoto] = useState(false);
+    const [isRestoring, setIsRestoring] = useState(true);
+
+    const loginWithPassword = async (authPassword: string, showSuccessToast = true) => {
+        const response = await fetch(`/api/admin/registrations?password=${encodeURIComponent(authPassword)}`);
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Invalid password');
+        }
+
+        localStorage.setItem(AUTH_STORAGE_KEY, authPassword);
+        setPassword(authPassword);
+        setIsAuthenticated(true);
+        setRegistrations(data.data || []);
+        if (showSuccessToast) {
+            toast.success('Login successful');
+        }
+    };
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
         try {
-            const response = await fetch(`/api/admin/registrations?password=${encodeURIComponent(password)}`);
-            
-            if (response.ok) {
-                const data = await response.json();
-                setIsAuthenticated(true);
-                setRegistrations(data.data || []);
-                toast.success('Login successful');
-            } else {
-                toast.error('Invalid password');
-            }
+            await loginWithPassword(password);
         } catch (error) {
             console.error('Login error:', error);
-            toast.error('Login failed');
+            toast.error('Invalid password');
         } finally {
             setIsLoading(false);
         }
@@ -195,6 +206,22 @@ export default function DashboardPage() {
     };
 
     useEffect(() => {
+        const savedPassword = localStorage.getItem(AUTH_STORAGE_KEY);
+        if (!savedPassword) {
+            setIsRestoring(false);
+            return;
+        }
+
+        loginWithPassword(savedPassword, false)
+            .catch(() => {
+                localStorage.removeItem(AUTH_STORAGE_KEY);
+            })
+            .finally(() => {
+                setIsRestoring(false);
+            });
+    }, []);
+
+    useEffect(() => {
         if (isAuthenticated && registrations.length === 0) {
             fetchRegistrations();
         }
@@ -225,6 +252,14 @@ export default function DashboardPage() {
                 );
         }
     };
+
+    if (isRestoring) {
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+                <Loader2 className="h-10 w-10 animate-spin text-slate-400" />
+            </div>
+        );
+    }
 
     if (!isAuthenticated) {
         return (

@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Cashfree, CFEnvironment } from 'cashfree-pg';
 import { createClient } from '@supabase/supabase-js';
+import { supabaseSecretKey, supabaseUrl } from '@/lib/supabase-env';
 
-// Use service role key for webhook to bypass RLS (same as verify-payment route)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
+const supabase = createClient(supabaseUrl, supabaseSecretKey);
 
 export async function POST(request: Request) {
     try {

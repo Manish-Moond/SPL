@@ -53,6 +53,8 @@ export default function PlayerInfoPage() {
         () => (players.length ? players[Math.max(0, Math.min(currentIndex, players.length - 1))] : null),
         [players, currentIndex]
     );
+    const isSold = selectedPlayer?.player_status === 'sold';
+    const isUnsold = selectedPlayer?.player_status === 'unsold';
 
     const showPrevious = () => {
         if (!players.length) return;
@@ -126,7 +128,7 @@ export default function PlayerInfoPage() {
             }
         }
 
-        const savedPassword = sessionStorage.getItem(AUTH_STORAGE_KEY);
+        const savedPassword = localStorage.getItem(AUTH_STORAGE_KEY);
         if (savedPassword) {
             setPassword(savedPassword);
             setIsAuthenticated(true);
@@ -200,7 +202,7 @@ export default function PlayerInfoPage() {
         if (!pending) return;
         const parsed = JSON.parse(pending);
         if (!Array.isArray(parsed) || parsed.length === 0) return;
-        const authPassword = sessionStorage.getItem(AUTH_STORAGE_KEY);
+        const authPassword = localStorage.getItem(AUTH_STORAGE_KEY);
         if (!authPassword) return;
 
         const remaining: typeof parsed = [];
@@ -236,7 +238,20 @@ export default function PlayerInfoPage() {
         }
 
         const soldPrice = status === 'sold' ? bidPrice : null;
+        const applyLocalStatus = () => {
+            setPlayers((list) => {
+                const next = list.map((player) =>
+                    player.id === selectedPlayer.id
+                        ? { ...player, player_status: status, sold_price: soldPrice }
+                        : player
+                );
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+                return next;
+            });
+        };
+
         setIsSavingStatus(true);
+        applyLocalStatus();
         try {
             const response = await fetch(`/api/players/update-status?password=${encodeURIComponent(password)}`, {
                 method: 'POST',
@@ -294,7 +309,7 @@ export default function PlayerInfoPage() {
             const list = Array.isArray(data?.data) ? data.data : [];
             setPlayers(list);
             localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-            sessionStorage.setItem(AUTH_STORAGE_KEY, password);
+            localStorage.setItem(AUTH_STORAGE_KEY, password);
             setIsAuthenticated(true);
             toast.success('Login successful');
             flushPendingUpdates();
@@ -374,8 +389,20 @@ export default function PlayerInfoPage() {
                         </div>
 
                         <div className="space-y-4">
-                            <div className="text-5xl font-semibold uppercase tracking-[0.12em] text-[#d6b15b]">
-                                {selectedPlayer.full_name}
+                            <div className="flex flex-wrap items-center gap-4">
+                                <div className="text-5xl font-semibold uppercase tracking-[0.12em] text-[#d6b15b]">
+                                    {selectedPlayer.full_name}
+                                </div>
+                                {isSold && (
+                                    <span className="rounded-full border border-red-400/70 bg-red-500/20 px-4 py-1.5 text-sm font-bold uppercase tracking-[0.25em] text-red-300">
+                                        Sold
+                                    </span>
+                                )}
+                                {isUnsold && (
+                                    <span className="rounded-full border border-slate-500/70 bg-slate-500/20 px-4 py-1.5 text-sm font-bold uppercase tracking-[0.25em] text-slate-300">
+                                        Unsold
+                                    </span>
+                                )}
                             </div>
                             <div className="text-2xl font-semibold uppercase tracking-[0.18em] text-slate-100">
                                 {roleLabel}
@@ -383,6 +410,11 @@ export default function PlayerInfoPage() {
                             <div className="text-lg uppercase tracking-[0.2em] text-slate-300">
                                 {styleLabel}
                             </div>
+                            {isSold && selectedPlayer.sold_price != null && (
+                                <div className="text-xl font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                                    Sold at ₹{selectedPlayer.sold_price}
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-wrap items-center gap-3 text-sm uppercase tracking-[0.2em] text-slate-200">
@@ -412,7 +444,7 @@ export default function PlayerInfoPage() {
                                         <img
                                             src={selectedPlayer.photo_url}
                                             alt={selectedPlayer.full_name}
-                                            className="h-[70vh] w-full object-contain bg-white"
+                                            className={`h-[70vh] w-full object-contain bg-white ${isSold ? 'grayscale opacity-70' : ''}`}
                                             onLoad={() => setIsPhotoLoading(false)}
                                             onError={() => setIsPhotoLoading(false)}
                                         />
@@ -420,6 +452,13 @@ export default function PlayerInfoPage() {
                                 ) : (
                                     <div className="flex h-[70vh] items-center justify-center bg-slate-100 text-slate-500">
                                         No photo
+                                    </div>
+                                )}
+                                {isSold && (
+                                    <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/35">
+                                        <div className="-rotate-12 rounded-md border-4 border-red-500 bg-red-500/10 px-8 py-3 text-5xl font-black tracking-[0.35em] text-red-500 shadow-lg">
+                                            SOLD
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -459,14 +498,16 @@ export default function PlayerInfoPage() {
                     <div className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-white/10 px-5 py-3 backdrop-blur">
                         <input
                             type="text"
-                            value={bidPrice}
+                            value={isSold && selectedPlayer.sold_price != null ? selectedPlayer.sold_price : bidPrice}
                             onChange={(event) => {
+                                if (isSold) return;
                                 const nextValue = Number(event.target.value.replace(/\D/g, ''));
                                 if (!Number.isNaN(nextValue)) {
                                     setBidPrice(Math.max(BID_START, nextValue));
                                 }
                             }}
                             onKeyDown={(event) => {
+                                if (isSold) return;
                                 if (event.key === 'ArrowUp') {
                                     event.preventDefault();
                                     const step = getBidStep(bidPrice);
@@ -478,23 +519,24 @@ export default function PlayerInfoPage() {
                                     setBidPrice((price) => Math.max(BID_START, price - step));
                                 }
                             }}
-                            className="w-32 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-center text-lg font-semibold text-white outline-none placeholder:text-slate-300"
+                            disabled={isSold}
+                            className="w-32 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-center text-lg font-semibold text-white outline-none placeholder:text-slate-300 disabled:cursor-not-allowed disabled:opacity-50"
                             inputMode="numeric"
                             aria-label="Current bid price"
                         />
                         <button
                             type="button"
                             onClick={() => updateStatus('sold')}
-                            disabled={isSavingStatus}
-                            className="rounded-full bg-emerald-400/90 px-6 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-emerald-300 disabled:opacity-60"
+                            disabled={isSavingStatus || isSold}
+                            className="rounded-full bg-emerald-400/90 px-6 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
                         >
                             Sold
                         </button>
                         <button
                             type="button"
                             onClick={() => updateStatus('unsold')}
-                            disabled={isSavingStatus}
-                            className="rounded-full bg-rose-400/90 px-6 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-rose-300 disabled:opacity-60"
+                            disabled={isSavingStatus || isUnsold}
+                            className="rounded-full bg-rose-400/90 px-6 py-2 text-sm font-semibold text-slate-900 shadow hover:bg-rose-300 disabled:cursor-not-allowed disabled:opacity-40"
                         >
                             Unsold
                         </button>
