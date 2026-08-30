@@ -58,16 +58,16 @@ export function Header() {
                                 </div>
                             </div>
                         </div>
-                        <span className="text-xl font-bold text-white hidden sm:block">Super Premier League</span>
+                        <span className="hidden whitespace-nowrap text-xl font-bold text-white sm:block lg:hidden xl:block">Super Premier League</span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center space-x-1">
+                    <nav className="hidden lg:flex items-center gap-1">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                                className={`whitespace-nowrap px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                                     isActive(link.href)
                                         ? 'text-[#FF6B00] bg-white/10'
                                         : 'text-neutral-300 hover:text-[#FF6B00] hover:bg-white/10'
@@ -77,15 +77,15 @@ export function Header() {
                             </Link>
                         ))}
                         <Link href="/register">
-                            <Button className="ml-4 bg-[#FF6B00] hover:bg-[#e55f00] text-white">
+                            <Button className="ml-3 bg-[#FF6B00] hover:bg-[#e55f00] text-white">
                                 Register
                             </Button>
                         </Link>
                     </nav>
 
-                    {/* Mobile Menu Button */}
+                    {/* Mobile / Tablet Menu Button */}
                     <button
-                        className="md:hidden p-2 text-neutral-300 hover:text-[#FF6B00]"
+                        className="lg:hidden p-2 text-neutral-300 hover:text-[#FF6B00]"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -97,9 +97,9 @@ export function Header() {
                     </button>
                 </div>
 
-                {/* Mobile Navigation */}
+                {/* Mobile / Tablet Navigation */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden border-t border-white/10 py-4">
+                    <div className="lg:hidden border-t border-white/10 py-4">
                         <nav className="flex flex-col space-y-2">
                             {navLinks.map((link) => (
                                 <Link

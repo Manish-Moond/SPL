@@ -58,7 +58,7 @@ export function RegistrationPage() {
                     <h1
                         className={`${oswald.className} text-4xl font-bold uppercase tracking-wide sm:text-5xl lg:text-6xl`}
                     >
-                        <span className="text-[#FF6B00]">SP(L)</span>{' '}
+                        <span className="text-[#FF6B00]">SPL</span>{' '}
                         <span className="text-white">REGISTRATION</span>
                     </h1>
                     <p className="mt-3 text-sm text-neutral-400 sm:text-base">

@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { Target, Eye, Sparkles, Trophy, Users, Award, Heart, Code, Phone, Mail } from 'lucide-react';
+import { Target, Eye, Sparkles, Trophy, Users, Award, Heart } from 'lucide-react';
 import { PageHeading, PageShell, themeCardClass, themePanelClass } from '@/components/page-shell';
 
 export default function AboutPage() {
@@ -107,66 +107,6 @@ export default function AboutPage() {
                         <p className="text-lg leading-relaxed text-neutral-300">
                             At its heart, SPL is about more than just matches — it's about dreams, discipline, and dedication. Every ball bowled and every run scored reflects the determination of Khandwa's cricketing community to make its mark.
                         </p>
-                    </CardContent>
-                </Card>
-
-                <Card className={themeCardClass}>
-                    <CardContent className="pt-6">
-                        <div className="mb-6 flex items-center gap-3">
-                            <Code className="h-8 w-8 text-[#FF6B00]" />
-                            <h2 className="text-2xl font-bold text-[#FF6B00]">Website Development</h2>
-                        </div>
-                        <p className="mb-6 text-center leading-relaxed text-neutral-300">
-                            This website was developed with care and attention to detail to provide the best experience for players and visitors.
-                        </p>
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <div className={`flex flex-col items-center gap-4 p-4 sm:items-start ${themePanelClass}`}>
-                                <div className="relative h-[200px] w-[200px] flex-shrink-0 overflow-hidden rounded-full border-2 border-[#FF6B00]/50 bg-neutral-800">
-                                    <img
-                                        src="/raja.jpg"
-                                        alt="Raja Tanwar"
-                                        className="h-full w-full object-cover"
-                                        onError={(e) => {
-                                            e.currentTarget.style.display = 'none';
-                                        }}
-                                    />
-                                </div>
-                                <div className="w-full min-w-0 flex-1 text-center sm:text-left">
-                                    <p className="mb-2 text-lg font-semibold text-neutral-200">Raja Tanwar</p>
-                                    <p className="mb-1 text-sm text-neutral-400">Website Developer</p>
-                                    <p className="mb-4 text-sm text-neutral-400">Village: Kotwada</p>
-                                    <div className="space-y-2">
-                                        <a href="mailto:rajatawar7284@gmail.com" className="block break-words text-neutral-400 transition-colors hover:text-[#FF6B00]">
-                                            <Mail className="mr-2 inline h-4 w-4" />
-                                            <span className="break-all">rajatawar7284@gmail.com</span>
-                                        </a>
-                                        <a href="tel:+919399574803" className="block text-neutral-400 transition-colors hover:text-[#FF6B00]">
-                                            <Phone className="mr-2 inline h-4 w-4" />
-                                            +91 93995 74803
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={`flex flex-col items-center gap-4 p-4 sm:items-start ${themePanelClass}`}>
-                                <div className="relative h-[200px] w-[200px] flex-shrink-0 overflow-hidden rounded-full border-2 border-[#FF6B00]/50 bg-neutral-800">
-                                </div>
-                                <div className="w-full min-w-0 flex-1 text-center sm:text-left">
-                                    <p className="mb-2 text-lg font-semibold text-neutral-200">Manish</p>
-                                    <p className="mb-1 text-sm text-neutral-400">Website Developer</p>
-                                    <div className="space-y-2">
-                                        <a href="mailto:mmanishmoond2000@gmail.com" className="block break-words text-neutral-400 transition-colors hover:text-[#FF6B00]">
-                                            <Mail className="mr-2 inline h-4 w-4" />
-                                            <span className="break-all">mmanishmoond2000@gmail.com</span>
-                                        </a>
-                                        <a href="tel:+919950816184" className="block text-neutral-400 transition-colors hover:text-[#FF6B00]">
-                                            <Phone className="mr-2 inline h-4 w-4" />
-                                            +91 99508 16184
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </CardContent>
                 </Card>
             </div>
