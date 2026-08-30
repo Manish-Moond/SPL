@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { SplLogo } from '@/components/spl-logo';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -34,29 +35,10 @@ export function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center space-x-2">
+                    <Link href="/" className="flex items-center gap-2.5">
                         <div className="relative">
-                            {/* SPL Logo - Stylized version based on description */}
-                            <div className="relative flex items-center justify-center">
-                                {/* Background glow effect */}
-                                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-orange-500/20 blur-xl"></div>
-                                
-                                {/* Logo container */}
-                                <div className="relative flex items-center space-x-1 px-3 py-2">
-                                    {/* S Letter */}
-                                    <span className="text-3xl font-black bg-gradient-to-b from-pink-500 via-magenta-500 to-orange-500 bg-clip-text text-transparent">
-                                        S
-                                    </span>
-                                    {/* P Letter */}
-                                    <span className="text-3xl font-black bg-gradient-to-b from-orange-500 via-yellow-400 to-green-400 bg-clip-text text-transparent">
-                                        P
-                                    </span>
-                                    {/* L Letter */}
-                                    <span className="text-3xl font-black bg-gradient-to-b from-green-400 via-teal-400 to-cyan-500 bg-clip-text text-transparent">
-                                        L
-                                    </span>
-                                </div>
-                            </div>
+                            <div className="absolute inset-0 rounded-full bg-[#FF6B00]/25 blur-lg" />
+                            <SplLogo className="relative h-12 w-12" />
                         </div>
                         <span className="hidden whitespace-nowrap text-xl font-bold text-white sm:block lg:hidden xl:block">Super Premier League</span>
                     </Link>
