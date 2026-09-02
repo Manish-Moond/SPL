@@ -65,6 +65,20 @@ export default function RulesPage() {
                                         जो खिलाड़ी नीलामी प्रक्रिया में बिक्री के लिए चयनित नहीं होंगे, उनके द्वारा भुगतान किया गया पंजीकरण शुल्क वापस नहीं किया जाएगा।
                                     </p>
                                 </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="mt-1 font-bold text-[#FF6B00]">7.</span>
+                                    <p>
+                                        टूर्नामेंट में होने वाले प्रत्येक मैच के लिए टीम के सभी खिलाड़ियों की उपस्थिति आवश्यक होगी। यदि कोई खिलाड़ी किसी भी कारणवश मैच में उपस्थित नहीं होता है, तो उसकी एक मैच की फीस काट ली जाएगी।
+                                    </p>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="mt-1 font-bold text-[#FF6B00]">8.</span>
+                                    <p>
+                                        रजिस्ट्रेशन के समय यदि किसी खिलाड़ी द्वारा फर्जी फोटो या गलत जानकारी दर्ज की जाती है, तो उसका रजिस्ट्रेशन रद्द किया जा सकता है और टूर्नामेंट आयोजकों द्वारा आवश्यक कार्रवाई की जाएगी।
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
@@ -115,6 +129,20 @@ export default function RulesPage() {
                                     <span className="mt-1 font-bold text-[#FF6B00]">6.</span>
                                     <p>
                                         Players who are not sold in the auction will not be eligible for a refund of their registration fee.
+                                    </p>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="mt-1 font-bold text-[#FF6B00]">7.</span>
+                                    <p>
+                                        All team players must be present for every match in the tournament. If a player is absent from a match for any reason, one match fee will be deducted.
+                                    </p>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="mt-1 font-bold text-[#FF6B00]">8.</span>
+                                    <p>
+                                        If a player submits a fake photo or incorrect information during registration, their registration may be cancelled and necessary action will be taken by the tournament organizers.
                                     </p>
                                 </div>
                             </div>
