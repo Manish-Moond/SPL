@@ -13,6 +13,7 @@ export const dynamic = 'force-dynamic';
 function RegistrationSuccessContent() {
     const searchParams = useSearchParams();
     const registrationId = searchParams.get('id');
+    const playerName = searchParams.get('name');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -43,6 +44,11 @@ function RegistrationSuccessContent() {
                     <CardTitle className="text-3xl font-bold text-[#FF6B00]">
                         Registration Successful!
                     </CardTitle>
+                    {playerName && (
+                        <p className="mt-3 text-xl font-semibold text-white">
+                            Welcome, <span className="text-[#FF6B00]">{playerName}</span>!
+                        </p>
+                    )}
                     <CardDescription className="text-slate-400 mt-2">
                         Your details have been saved successfully
                     </CardDescription>

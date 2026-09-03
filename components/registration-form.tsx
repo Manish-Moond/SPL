@@ -216,7 +216,7 @@ export function RegistrationForm() {
             }
 
             toast.success('Registration submitted successfully!');
-            router.push('/registration-success');
+            router.push(`/registration-success?name=${encodeURIComponent(values.full_name)}`);
         } catch (error) {
             console.error('Registration error:', error);
             toast.error(error instanceof Error ? error.message : 'Something went wrong');
