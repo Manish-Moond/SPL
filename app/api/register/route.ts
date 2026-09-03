@@ -167,7 +167,7 @@ export async function POST(request: Request) {
                 batting_style,
                 bowling_style,
                 photo_url,
-                amount: 500.00,
+                amount: 550.00,
                 payment_status: 'pending',
                 payment_screenshot_url,
                 upi_transaction_id,

@@ -76,7 +76,7 @@ export function Checkout() {
                     Complete Payment
                 </CardTitle>
                 <CardDescription className="text-center text-slate-400">
-                    Entry Fee: ₹500.00
+                    Entry Fee: ₹550.00
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center gap-4">

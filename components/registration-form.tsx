@@ -496,7 +496,7 @@ export function RegistrationForm() {
                     <div className="space-y-4 rounded-xl border border-[#38BDF8]/40 bg-[#081826]/30 p-4">
                         <h3 className="text-lg font-semibold text-[#38BDF8]">Payment Details</h3>
                         <p className="text-sm text-neutral-300">
-                            Registration Fee: <span className="font-bold text-[#38BDF8]">₹500</span>
+                            Registration Fee: <span className="font-bold text-[#38BDF8]">₹550</span>
                         </p>
                         <div className="rounded-md border border-[#38BDF8]/40 bg-[#081420]/40 p-3">
                             <p className="mb-2 text-xs text-neutral-400">Pay to this UPI ID:</p>
@@ -521,7 +521,7 @@ export function RegistrationForm() {
                             <ol className="list-inside list-decimal space-y-1 text-xs text-neutral-300">
                                 <li>Open your UPI app (PhonePe, Google Pay, Paytm, etc.)</li>
                                 <li>Enter UPI ID: <span className="font-mono text-[#38BDF8]">{UPI_ID}</span></li>
-                                <li>Enter amount: <span className="font-semibold">₹500</span></li>
+                                <li>Enter amount: <span className="font-semibold">₹550</span></li>
                                 <li>Add note: Cricket Tournament Registration</li>
                                 <li>Complete the payment and upload the screenshot below</li>
                             </ol>
