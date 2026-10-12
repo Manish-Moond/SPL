@@ -1,35 +1,11 @@
 import { Oswald } from 'next/font/google';
 import Image from 'next/image';
-import { BadgeCheck, Shield, Trophy, Zap } from 'lucide-react';
-import { RegistrationForm } from '@/components/registration-form';
+import { RegistrationClosed } from '@/components/registration-closed';
 
 const oswald = Oswald({
     subsets: ['latin'],
     weight: ['500', '600', '700'],
 });
-
-const TRUST_ITEMS = [
-    {
-        icon: Shield,
-        title: 'Secure Registration',
-        subtitle: 'Your data is safe with us',
-    },
-    {
-        icon: Zap,
-        title: 'Quick & Easy Process',
-        subtitle: 'Takes less than 2 minutes',
-    },
-    {
-        icon: BadgeCheck,
-        title: '100% Verified Information',
-        subtitle: 'Trusted & reliable',
-    },
-    {
-        icon: Trophy,
-        title: 'For Players, By Players',
-        subtitle: 'Built for cricketers',
-    },
-];
 
 export function RegistrationPage() {
     return (
@@ -62,26 +38,12 @@ export function RegistrationPage() {
                         <span className="text-white">REGISTRATION</span>
                     </h1>
                     <p className="mt-3 text-sm text-neutral-400 sm:text-base">
-                        Please fill in the details to register
+                        Registrations for this season are now closed
                     </p>
                 </div>
 
                 <div className="lg:max-w-3xl">
-                    <RegistrationForm />
-                </div>
-
-                <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:max-w-4xl lg:grid-cols-4">
-                    {TRUST_ITEMS.map(({ icon: Icon, title, subtitle }) => (
-                        <div key={title} className="flex items-center gap-3">
-                            <div className="flex size-11 shrink-0 items-center justify-center rounded-full border border-[#FF6B00]">
-                                <Icon className="size-5 text-white" />
-                            </div>
-                            <div>
-                                <p className="text-sm font-semibold text-white">{title}</p>
-                                <p className="text-xs text-neutral-400">{subtitle}</p>
-                            </div>
-                        </div>
-                    ))}
+                    <RegistrationClosed />
                 </div>
             </div>
         </div>
