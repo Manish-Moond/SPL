@@ -6,7 +6,7 @@ import { supabaseSecretKey, supabaseUrl } from '@/lib/supabase-env';
 const supabase = createClient(supabaseUrl, supabaseSecretKey);
 
 // Set to false to close registration
-const REGISTRATION_OPEN = true;
+const REGISTRATION_OPEN = false;
 
 export async function POST(request: Request) {
     try {
